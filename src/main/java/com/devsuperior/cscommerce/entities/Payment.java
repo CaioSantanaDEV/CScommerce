@@ -3,6 +3,7 @@ package com.devsuperior.cscommerce.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_payment")
@@ -18,6 +19,18 @@ public class Payment {
     @OneToOne
     @MapsId
     private Order order;
+
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Payment payment)) return false;
+
+        return Objects.equals(id, payment.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
     public Payment(){
     }
